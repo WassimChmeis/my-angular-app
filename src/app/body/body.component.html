@@ -1,0 +1,38 @@
+<app-header (valueToSearch)="handleSearching($event)"></app-header>
+
+<div
+  class="py-16 px-16 bg-[#111827] min-h-screen w-full text-white flex flex-col justify-center items-center"
+  *ngIf="cloneData.length == 0"
+>
+  No Result found, Please check the other pages
+</div>
+
+<div
+  *ngIf="cloneData.length > 0"
+  class="py-16 px-16 bg-[#111827] min-h-screen w-full flex flex-col justify-center items-center text-white"
+>
+  <div class="flex flex-wrap justify-center w-[70%] gap-6">
+    <div *ngFor="let item of cloneData" class="mx-auto">
+      <app-card [data]="item"></app-card>
+    </div>
+  </div>
+  <div class="my-4"></div>
+  <div class="flex justify-start w-[70%] px-10 gap-6">
+    <button
+      class="py-3 px-6 rounded-xl bg-[#1f2937] transition-all"
+      (click)="getNextPage(currentPage - 1)"
+      [disabled]="currentPage == 1"
+      [ngClass]="{ 'hover:bg-slate-600': currentPage !== 1 }"
+    >
+      Back
+    </button>
+    <button
+      class="py-3 px-6 rounded-xl bg-[#1f2937] hover:bg-slate-600 transition-all"
+      (click)="getNextPage(currentPage + 1)"
+      [disabled]="currentPage === totalPages"
+      [ngClass]="{ 'hover:bg-slate-600': currentPage !== totalPages }"
+    >
+      Next
+    </button>
+  </div>
+</div>

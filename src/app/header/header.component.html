@@ -1,0 +1,13 @@
+<div
+  class="navbar justify-between bg-[#0f172a] text-white flex flex-row px-16 py-6"
+>
+  <div>item 1</div>
+  <!-- <input type="text" (change)="searchInput($event)" /> -->
+  <input
+    class="text-b rounded h-8 w-48 bg-gray-600 px-5"
+    [(ngModel)]="searchQuery"
+    (ngModelChange)="onSearchChange()"
+    placeholder="Search by ID ..."
+  />
+  <div>item 3</div>
+</div>

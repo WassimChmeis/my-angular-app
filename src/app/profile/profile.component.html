@@ -1,0 +1,26 @@
+<div
+  class="w-screen bg-[#111827] text-white h-screen flex flex-col items-center justify-center"
+>
+  <div
+    class="rounded-xl w-[300px] bg-[#1f2937] flex flex-col justify-center items-center"
+  >
+    <img [src]="profileData.data.avatar" class="w-[150px] rounded-3xl my-6" />
+    <h1>{{ profileData.data.first_name }} {{ profileData.data.last_name }}</h1>
+
+    <h4 class="text-[#848c99]">email: {{ profileData.data.email }}</h4>
+  </div>
+  <div class="w-[300px]">
+    <button
+      class="py-3 mt-3 px-6 bg-[#1f2937] rounded-xl hover:bg-gray-600"
+      (click)="returnToHome()"
+    >
+      {{ "<-Back" }}
+    </button>
+  </div>
+  <!-- <div
+    *ngIf="spinningBar"
+    class="absolute inset-0 flex items-center justify-center"
+  >
+    <mat-spinner class="" [diameter]="'100'"></mat-spinner>
+  </div> -->
+</div>
