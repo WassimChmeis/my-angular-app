@@ -11,6 +11,9 @@ import { CardComponent } from './body/card/card.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { appReducer } from './store/app.state';
+import { HoverDirective } from './hover.directive';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,7 @@ import { FormsModule } from '@angular/forms';
     BodyComponent,
     CardComponent,
     ProfileComponent,
+    HoverDirective,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +31,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     MatProgressSpinnerModule,
     FormsModule,
+    StoreModule.forRoot(appReducer),
   ],
   providers: [],
   bootstrap: [AppComponent],

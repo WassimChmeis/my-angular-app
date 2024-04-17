@@ -12,11 +12,13 @@ export class CardService {
 
   constructor(private http: HttpClient) {}
 
+  //fetching all data by page
   getCards(page: number): Observable<any> {
     const url = `${this.apiUrl}?page=${page}`;
     return this.http.get<any>(url);
   }
 
+  //fetching specific profile data
   getProfile(id: number): Observable<any> {
     const url = 'https://reqres.in/api/users/' + id;
     return this.http.get<any>(url).pipe(

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CardService } from '../services/card.service';
-import { ProgressBarService } from '../services/progress-bar.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/app.state';
+import { setLoadingSpinner } from '../store/shared/shared.actions';
 
 const CACHE_KEY = 'httpDataCache';
 
@@ -21,18 +23,27 @@ export class BodyComponent implements OnInit {
 
   constructor(
     private cardService: CardService,
-    private progressBar: ProgressBarService
+    private store: Store<AppState>
   ) {}
 
   ngOnInit() {
-    this.spinningBar = this.progressBar.progressBarVisibility$;
+    // loading spinner activated
+    this.store.dispatch(setLoadingSpinner({ status: true }));
+
+    this.initialDataFetching();
+  }
+
+  initialDataFetching() {
     const cachedData = this.getCachedData();
+    //checking for chached Data
     if (cachedData) {
       this.data = cachedData;
       this.cloneData = this.data.data;
       this.currentPage = cachedData.page;
       this.totalPages = cachedData.total_pages;
+      this.store.dispatch(setLoadingSpinner({ status: false }));
     } else {
+      //no chached data so fetch data from api
       this.loadCards();
     }
   }
@@ -65,27 +76,32 @@ export class BodyComponent implements OnInit {
 
   loadCards(page = 1) {
     // Replace with the desired page number
+
     this.cardService.getCards(page).subscribe((result: any) => {
       this.data = result; // Assuming the data structure has a 'data' property
       this.currentPage = result.page;
       this.totalPages = result.total_pages;
+
+      //for data filtering
       this.cloneData = this.data['data'];
-      // console.log(this.data);
       // Cache the data
       this.cacheData(this.data);
-      this.progressBar.setProgressBarVisibility(false);
+
+      //deactivate spinner animation
+      this.store.dispatch(setLoadingSpinner({ status: false }));
     });
   }
 
+  // this function fetches the next page
   getNextPage(number: any) {
-    this.progressBar.setProgressBarVisibility(true);
+    //spinner true
+    this.store.dispatch(setLoadingSpinner({ status: true }));
 
+    //checking if the next page is available
     if (number > 0 && number <= this.totalPages) this.loadCards(number);
   }
 
   handleSearching(event: any) {
-    console.log(event, ': testing');
-    console.log(this.data['data']);
     if (event !== '') {
       this.cloneData = this.data.data.filter((item) => {
         return item['id'] == event;
@@ -93,7 +109,5 @@ export class BodyComponent implements OnInit {
     } else {
       this.cloneData = this.data.data;
     }
-
-    console.log(this.data['data']);
   }
 }

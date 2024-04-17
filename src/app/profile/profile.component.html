@@ -2,6 +2,7 @@
   class="w-screen bg-[#111827] text-white h-screen flex flex-col items-center justify-center"
 >
   <div
+    *ngIf="profileData"
     class="rounded-xl w-[300px] bg-[#1f2937] flex flex-col justify-center items-center"
   >
     <img [src]="profileData.data.avatar" class="w-[150px] rounded-3xl my-6" />
@@ -17,10 +18,4 @@
       {{ "<-Back" }}
     </button>
   </div>
-  <!-- <div
-    *ngIf="spinningBar"
-    class="absolute inset-0 flex items-center justify-center"
-  >
-    <mat-spinner class="" [diameter]="'100'"></mat-spinner>
-  </div> -->
 </div>

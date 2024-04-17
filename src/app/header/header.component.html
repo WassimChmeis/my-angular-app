@@ -1,13 +1,17 @@
 <div
-  class="navbar justify-between bg-[#0f172a] text-white flex flex-row px-16 py-6"
+  class="navbar justify-between bg-[#0a101d] text-white flex flex-row px-16 py-6"
 >
-  <div>item 1</div>
-  <!-- <input type="text" (change)="searchInput($event)" /> -->
+  <div>Wassim Chmeis, Software Dev.</div>
   <input
     class="text-b rounded h-8 w-48 bg-gray-600 px-5"
     [(ngModel)]="searchQuery"
     (ngModelChange)="onSearchChange()"
     placeholder="Search by ID ..."
   />
-  <div>item 3</div>
+
+  <div class="flex gap-3">
+    <div>Home</div>
+    <div>Contacts</div>
+    <div>Careers</div>
+  </div>
 </div>

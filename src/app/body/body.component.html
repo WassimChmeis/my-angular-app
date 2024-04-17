@@ -18,6 +18,7 @@
   </div>
   <div class="my-4"></div>
   <div class="flex justify-start w-[70%] px-10 gap-6">
+    <!-- the back button is disabled if there is no previous page -->
     <button
       class="py-3 px-6 rounded-xl bg-[#1f2937] transition-all"
       (click)="getNextPage(currentPage - 1)"
@@ -26,6 +27,7 @@
     >
       Back
     </button>
+    <!-- the next button is disabled if there is no next page (reaching last page) -->
     <button
       class="py-3 px-6 rounded-xl bg-[#1f2937] hover:bg-slate-600 transition-all"
       (click)="getNextPage(currentPage + 1)"

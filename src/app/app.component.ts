@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProgressBarService } from './services/progress-bar.service';
+import { Observable } from 'rxjs';
+import { getLoading } from './store/shared/shared.selector';
+import { AppState } from './store/app.state';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +10,11 @@ import { ProgressBarService } from './services/progress-bar.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  spinningBar: any;
+  showLoading!: Observable<boolean>;
 
-  constructor(private progressBar: ProgressBarService) {}
-  ngOnInit(): void {
-    this.spinningBar = this.progressBar.progressBarVisibility$;
+  constructor(private store: Store<AppState>) {}
+
+  ngOnInit() {
+    this.showLoading = this.store.select(getLoading);
   }
-  title = 'Tour of Heroes';
 }
